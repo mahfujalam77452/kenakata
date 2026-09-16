@@ -1,26 +1,14 @@
 import Link from "next/link";
 import ProductCard, { type ProductCardData } from "./ProductCard";
+import  {getProduct} from "@/lib/api/product"
 
-// TEMPLATE DATA — TODO: replace with a real API call, e.g.
-//   const products = await getProducts({ limit: 12 })
-// Field choices here match what /products actually returns (title, price,
-// category, images[]), plus optional discount fields — see the note in
-// ProductCard.tsx about where discount data should really come from.
-const FEATURED_PRODUCTS_PLACEHOLDER: ProductCardData[] = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  slug: `sample-product-${i + 1}`,
-  title: `Sample product ${i + 1}`,
-  price: 990 + i * 45,
-  originalPrice: i % 3 === 0 ? 1490 + i * 45 : undefined,
-  discountPercent: i % 3 === 0 ? 20 : undefined,
-  image: `https://placehold.co/400x400?text=Product+${i + 1}`,
-  category: "Category name",
-}));
+//Featching 12 images for feature products
+const FEATURED_PRODUCTS_PLACEHOLDER: ProductCardData[] = await getProduct({limit:12,offset:0})
+
+console.log(FEATURED_PRODUCTS_PLACEHOLDER)
 
 /**
- * "Featured products" home section — 12-item grid using the shared
- * ProductCard (no add-to-cart / buy-now here, per the brief), with a
- * "See all" link to the full listing page.
+ 
  */
 export default function FeaturedProducts() {
   return (

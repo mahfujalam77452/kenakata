@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Menu, Search, ShoppingCart } from "lucide-react";
+import ShoppingCarts from "../ui/ShoppingCart";
 // npm install lucide-react   (if not already installed)
 
 // TEMPLATE DATA — replace with real state once contexts exist
@@ -40,7 +41,7 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         {/* Logo — TODO: confirm src path + adjust width/height to match your file */}
         <Link href="/" className="flex shrink-0 items-center">
-          <Image src="/Icon/Header/Code_Generated_Image.png" alt="KenaKata" width={140} height={36} priority />
+          <Image src="/Icon/Header/Code_Generated_Image.png" alt="KenaKata icon" width={140} height={36} priority />
         </Link>
 
         {/* Search — desktop */}
@@ -74,14 +75,9 @@ export default function Header() {
             )}
           </Link>
 
-          <Link href="/cart" aria-label="Cart" className="relative">
-            <ShoppingCart className="h-5 w-5 text-white" />
-            {CART_ITEM_COUNT_PLACEHOLDER > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-accent-marigold text-[10px] font-semibold text-brand-teal">
-                {CART_ITEM_COUNT_PLACEHOLDER}
-              </span>
-            )}
-          </Link>
+         
+
+          <ShoppingCarts/>
 
           {/* Mobile menu toggle — plain <label>, no onClick/JS needed */}
           <label

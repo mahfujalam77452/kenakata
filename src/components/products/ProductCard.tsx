@@ -1,33 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Matches the real Product shape from the API, plus two optional fields
-// (originalPrice, discountPercent) that the API doesn't return directly —
-// TODO: decide where discount data actually comes from (a promotions table?
-// a hardcoded sale list?) once that's designed; for now these are optional
-// so the card works fine without them too.
-export interface ProductCardData {
-  id: number;
-  slug: string;
-  title: string;
-  price: number;
+import { Product } from "@/lib/types/Product";
+
+// I intentionally add it for design purpose
+
+export interface ProductCardData extends Product{
+ 
   originalPrice?: number;
   discountPercent?: number;
-  image: string;
-  category: string;
+ 
 }
 
-/**
- * Product card — image, category label, title, price (+ optional strike-
- * through original price / discount badge).
- *
- * Intentionally has NO add-to-cart / buy-now button — per the brief, this
- * card is used on the Home page "Featured products" section, where the
- * click target is the product itself, not a quick-add action. The full
- * product-listing grid (Day 2) can wrap this same card with an add-to-cart
- * button in that context if needed, without changing this file.
- */
+
 export default function ProductCard({ product }: { product: ProductCardData }) {
+
+  //Just adding intensional discount for random product for inhance desining
+
+  if (product.id%4 === 0) {
+    product.discountPercent = 20
+    product.originalPrice =Math.round(product.price + (20*product.price)/100)
+  }
+
+
   return (
     <Link
       href={`/products/${product.slug}`}
@@ -35,8 +30,9 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
     >
       <div className="relative aspect-square w-full bg-mist">
         <Image
-          src={product.image}
+          src={product.images[0]}
           alt={product.title}
+          loading="lazy"
           fill
           sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
           className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
@@ -49,7 +45,7 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
       </div>
 
       <div className="space-y-1 p-3">
-        <p className="text-xs text-ink/50">{product.category}</p>
+        <p className="text-xs text-ink/50">{product.category.name.length < 20?product.category.name:"Kid's Toy"}</p>
         <h3 className="line-clamp-2 text-sm font-medium text-ink">{product.title}</h3>
         <div className="flex items-baseline gap-2">
           <span className="text-sm font-semibold text-ink">৳{product.price}</span>

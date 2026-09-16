@@ -18,7 +18,7 @@ export default async function CategorySection() {
 
       <div className="flex gap-5 overflow-x-auto pb-2 sm:grid sm:grid-cols-4 sm:overflow-visible lg:grid-cols-8">
         {CATEGORIES_PLACEHOLDER.map((category) => (
-          <CategoryCard category = {category}/>
+          <CategoryCard key = {category.id} category = {category}/>
         ))}
       </div>
     </section>

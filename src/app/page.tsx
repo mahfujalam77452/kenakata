@@ -6,6 +6,7 @@ import { getProduct } from "@/lib/api/product";
 
 import HeroSection from "@/components/ui/Hero";
 import CategorySection from "@/components/category/CategorySection";
+import FeaturedProducts from "@/components/products/Featuredproducts";
 
 export default async function Home() {
   
@@ -14,6 +15,7 @@ export default async function Home() {
     <div className="home">
       <HeroSection/>
       <CategorySection/>
+      <FeaturedProducts/>
     </div>
   );
 }
