@@ -30,7 +30,7 @@ const FOOTER_COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-white/80">
+    <footer className="bg-[#1C1F1E] text-white/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
         {/* Brand + contact */}
         <div className="space-y-4">

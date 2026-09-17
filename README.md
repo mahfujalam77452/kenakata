@@ -11,7 +11,7 @@ A production-style e-commerce storefront built with **Next.js (App Router)**, **
 
 KenaKata is a full e-commerce storefront covering the public shopping flow end to end: a home page with a promotional hero and featured products, a filterable/sortable product listing, product detail pages with an image gallery and related products, a cart with persistent state, authentication (login/register), and a checkout flow that gates on login status before reaching a payment-success page.
 
-The build prioritizes real, working functionality over scope — every page listed below is wired to the live API rather than left as a static mock.
+The build prioritizes real, working functionality over scope — every page listed below is wired to the live API rather than left as a static mock, and includes a dark/light theme toggle available across the whole app.
 
 **Core pages**
 - Home (hero carousel, category section, featured products)
@@ -40,6 +40,7 @@ context/        → CartContext, ProductContext for state shared across the tree
 **A few decisions worth calling out specifically, since they were priorities for this build:**
 
 - **Session persistence:** login state is stored client-side after calling the auth API, so a refresh doesn't log the user out mid-session. The checkout flow reads this state to decide whether to send the user to `/login` or straight to `/payment-success`.
+- **Dark/light theme toggle** is implemented across the app, with the user's preference respected on return visits rather than resetting to a default every time they come back.
 - **Default Next.js special files are all implemented, not skipped:** `loading.tsx`, `error.tsx`, `not-found.tsx`, and `global-error.tsx` are all in place, so route-level loading states, recoverable errors, missing routes, and unrecoverable root-level errors each have their own real UI instead of a blank screen or a default Next.js error page.
 
 ---

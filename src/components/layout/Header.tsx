@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart, Menu } from "lucide-react";
 import ShoppingCarts from "../ui/ShoppingCart";
+import ThemeToggle from "../ui/ThemeToggle";
 import AuthAction from "../auth/authAction";
 
 const WISHLIST_COUNT_PLACEHOLDER = 2;
@@ -58,6 +59,8 @@ export default function Header() {
           </Link>
 
           <ShoppingCarts />
+
+          <ThemeToggle />
 
           {/* Mobile menu toggle */}
           <label
