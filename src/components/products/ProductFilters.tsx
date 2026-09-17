@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { type ProductCardData } from "@/components/products/ProductCard";
 import { Query } from "@/lib/types/Product";
 import  {getProduct} from "@/lib/api/product"
+import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 
 
 
@@ -21,19 +22,26 @@ const ACTIVE_CATEGORY_SLUG_PLACEHOLDER: string | null = null;
 
 type ProductProps = {
   pageNumber:number
+  searchcategory?:number|0
   setPageNumber:React.Dispatch<React.SetStateAction<number>>
   products: ProductCardData[];
   setProducts: React.Dispatch<React.SetStateAction<ProductCardData[]>>;
 };
-export default function ProductFilters({pageNumber,setPageNumber,products,setProducts}:ProductProps) {
-
-    const [activeId,setActiveId] = useState<number>(0);
+export default function ProductFilters({pageNumber,searchcategory,setPageNumber,products,setProducts}:ProductProps) {
+    
+    const [activeId,setActiveId] = useState<number>(searchcategory?searchcategory:0);
     const [minValue,setMinValue] = useState<number>(0);
     const [maxValue,setMAXvalue] = useState<number>(minValue);
     //0-for no sorting , 1-for sort by assending order , 2 - for sort by decending order
     const [sortValue,setSortValue] = useState<number>(0);
     const [duplicateProducts,setDuplicateProducts] = useState<ProductCardData[]>(products)
     const {categories} = useProduct();
+
+
+     if( !(searchcategory) && searchcategory !== 0 ){
+              setActiveId(searchcategory);
+              searchcategory=0;
+            }
 
     function makeSort(sortValue:number) {
 
@@ -55,10 +63,11 @@ export default function ProductFilters({pageNumber,setPageNumber,products,setPro
         () => {
             
             async function getProducts() {
+                
                 const query:Query = {}
                 if(minValue > 0)query.price_min = minValue;
                 if(maxValue >0)query.price_max=maxValue;
-                if(activeId > 0)query.categoryId = activeId;
+                if(activeId > 0)query.categoryId =activeId;
                 query.offset = pageNumber-1;
                 query.limit = 12;
                 const allProducts = await getProduct(query)

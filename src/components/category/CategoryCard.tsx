@@ -7,7 +7,7 @@ export default function CategoryCard({category}:{category:Category}) {
         <>
            <Link
             key={category.id}
-            href={`/products?categorySlug=${category.slug}`}
+            href={`/products?categoryId=${category.id}`}
             className="group flex w-20 shrink-0 flex-col items-center gap-2 text-center sm:w-auto"
           >
             <span className="relative block h-16 w-16 overflow-hidden rounded-full border border-mist bg-white transition-transform group-hover:scale-105 sm:h-20 sm:w-20">

@@ -42,6 +42,8 @@ export function ProductProvider({
         },[]
     )
 
+    //For setting all cartItems in 
+
   return (
     <ProductContext.Provider value={{ cartItems, setCartItems,categories }}>
       {children}

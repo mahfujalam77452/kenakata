@@ -1,5 +1,6 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import ProductCard, { type ProductCardData } from "@/components/products/ProductCard";
 import ProductFilters from "@/components/products/ProductFilters";
@@ -12,21 +13,29 @@ const CURRENT_PAGE_PLACEHOLDER = 1;
 
 
 export default function ProductsPage() {
-    const [pageNumber,setPageNumber] = useState<number>(1);
 
-    const [products,setProducts] = useState<ProductCardData[]>([]);
+  const searchParams = useSearchParams();
+    
+  const [pageNumber,setPageNumber] = useState<number>(1);
+  
+
+  const [products,setProducts] = useState<ProductCardData[]>([]);
+
+
+  
     
     
 
   return (
     <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
-      {/* Mobile filters toggle — pure HTML <details>, no JS */}
+      {/* Mobile filters toggle  */}
       <details className="mb-4 rounded-lg border border-mist p-3 lg:hidden">
         <summary className="cursor-pointer font-heading text-sm font-semibold text-ink">
           Filters
         </summary>
         <div className="mt-4">
           <ProductFilters
+          searchcategory={Number(searchParams.get("categoryId"))}
           products={products}
           setProducts={setProducts} 
           pageNumber={pageNumber}
@@ -38,6 +47,7 @@ export default function ProductsPage() {
         {/* Desktop sidebar */}
         <aside className="hidden lg:block">
           <ProductFilters
+          searchcategory={Number(searchParams.get("categoryId"))}
           products={products}
           setProducts={setProducts} 
           pageNumber={pageNumber}

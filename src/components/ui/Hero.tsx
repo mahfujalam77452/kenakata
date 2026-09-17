@@ -22,7 +22,7 @@ const STATIC_PROMOS = [
   { id: 4, src: "/product_four.jpg", href: "#", alt: "Promo product buscat" },
 ];
 
-const AUTO_SLIDE_INTERVAL_MS = 4000;
+const AUTO_SLIDE_INTERVAL_MS = 2000;
 
 
 export default function HeroSection() {
