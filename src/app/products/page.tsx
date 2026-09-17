@@ -1,4 +1,5 @@
 "use client"
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
@@ -13,6 +14,14 @@ const CURRENT_PAGE_PLACEHOLDER = 1;
 
 
 export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8" />}>
+      <ProductsContent />
+    </Suspense>
+  );
+}
+
+function ProductsContent() {
 
   const searchParams = useSearchParams();
     

@@ -38,13 +38,6 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
     const {categories} = useProduct();
 
 
-     if( !(searchcategory) && searchcategory !== 0 ){
-
-      //Its showing error but works perfectly
-              setActiveId(searchcategory);
-              searchcategory=0;
-            }
-
     function makeSort(sortValue:number) {
 
         console.log("hey I am here as sortValue :",sortValue)

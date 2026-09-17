@@ -24,7 +24,10 @@ export function ProductProvider({
  
 // For add/remove/purches cart data globally
   
-  const [cartItems, setCartItems] = useState<CartItem[]>(JSON.parse(localStorage.getItem("cartItems") || "[]"));
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    if (typeof window === "undefined") return [];
+    return JSON.parse(window.localStorage.getItem("cartItems") || "[]");
+  });
 //For storing all categories early
   const [categories,setCategories] = useState<Category[]>([])
 
