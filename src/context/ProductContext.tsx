@@ -24,7 +24,7 @@ export function ProductProvider({
  
 // For add/remove/purches cart data globally
   
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(JSON.parse(localStorage.getItem("cartItems") || "[]"));
 //For storing all categories early
   const [categories,setCategories] = useState<Category[]>([])
 
@@ -42,7 +42,13 @@ export function ProductProvider({
         },[]
     )
 
-    //For setting all cartItems in 
+    //For setting all cartItems in localStorage for saving cartItems
+
+    useEffect(
+      () => {
+       localStorage.setItem("cartItems",JSON.stringify(cartItems));
+      },[cartItems]
+    )
 
   return (
     <ProductContext.Provider value={{ cartItems, setCartItems,categories }}>
