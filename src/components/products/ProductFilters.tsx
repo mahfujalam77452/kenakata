@@ -31,7 +31,7 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
     
     const [activeId,setActiveId] = useState<number>(searchcategory?searchcategory:0);
     const [minValue,setMinValue] = useState<number>(0);
-    const [maxValue,setMAXvalue] = useState<number>(minValue);
+    const [maxValue,setMAXvalue] = useState<number>(0);
     //0-for no sorting , 1-for sort by assending order , 2 - for sort by decending order
     const [sortValue,setSortValue] = useState<number>(0);
     const [duplicateProducts,setDuplicateProducts] = useState<ProductCardData[]>(products)
@@ -39,13 +39,15 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
 
 
      if( !(searchcategory) && searchcategory !== 0 ){
+
+      //Its showing error but works perfectly
               setActiveId(searchcategory);
               searchcategory=0;
             }
 
     function makeSort(sortValue:number) {
 
-        console.log("hey I am here :",sortValue)
+        console.log("hey I am here as sortValue :",sortValue)
         if(sortValue === 0) {
             setProducts(duplicateProducts)
         }
@@ -65,8 +67,12 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
             async function getProducts() {
                 
                 const query:Query = {}
+                //Collecting the query
                 if(minValue > 0)query.price_min = minValue;
-                if(maxValue >0)query.price_max=maxValue;
+                //This api doesn't works only with Minimum price Thats why i do this
+                if(minValue>0)query.price_max= 100000
+                if(maxValue > 0)query.price_max = maxValue
+                
                 if(activeId > 0)query.categoryId =activeId;
                 query.offset = pageNumber-1;
                 query.limit = 12;
@@ -75,8 +81,12 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
                 setProducts(allProducts)
                 console.log("duplicate Products ..",duplicateProducts)
             }
-
+          //I applied here debouncing for minimum api call for max/min price
+    
             getProducts();
+         
+
+            
         },[activeId,minValue,maxValue,pageNumber]
     )
 
@@ -130,13 +140,13 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
             
             <input
               type="number"
-             
+              
               placeholder="Min"
               onChange={(e)=>{
-                if(Number(e.target.value )>=0){
+                
                       setMinValue(Number(e.target.value))
                       setPageNumber(1)
-                }
+                
               }}
               className="w-full rounded-md border border-mist px-2 py-1.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-marigold"
             />
@@ -145,10 +155,10 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
               type="number"
               
               onChange={(e) => {
-                if(Number(e.target.value)>=minValue){
+                
                     setMAXvalue(Number(e.target.value))
                     setPageNumber(1)
-                }
+               
               }}
               placeholder='Max'
               className="w-full rounded-md border border-mist px-2 py-1.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-marigold"
