@@ -6,7 +6,7 @@ import ProductFilters from "@/components/products/ProductFilters";
 import  {getProduct} from "@/lib/api/product"
 
 
-.
+
 const TOTAL_PAGES_PLACEHOLDER = 5;
 const CURRENT_PAGE_PLACEHOLDER = 1;
 
