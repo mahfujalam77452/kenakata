@@ -5,10 +5,7 @@ import { Minus, Plus } from "lucide-react";
 import type { Product } from "@/lib/types/Product";
 import type { CartItem } from "@/lib/types/Product";
 
-// ⚠️ ASSUMPTION — adjust this import to match your actual CartContext file
-// and hook name. Expected shape:
-//   cartItems: CartItem[]
-//   setCartItems: Dispatch<SetStateAction<CartItem[]>>
+
 import { useProduct } from "@/context/ProductContext";
 
 export default function AddToCartButton({ product }: { product: Product }) {

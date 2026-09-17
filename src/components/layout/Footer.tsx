@@ -27,18 +27,7 @@ const FOOTER_COLUMNS = [
   },
 ];
 
-/**
- * Site footer — brand/contact block + link columns + bottom bar.
- *
- * Notes for wiring this up later:
- * - Logo: real <Image>, same file/dimensions as Header — TODO: adjust
- *   width/height if the footer wants a different logo size.
- * - Every link below is `href="#"` — TODO: point each at its real route once
- *   those pages exist.
- * - Phone number and social links are placeholders — TODO: replace with real
- *   values, ideally pulled from a single `siteConfig` constant so Header/
- *   Footer/anywhere else stay in sync.
- */
+
 export default function Footer() {
   return (
     <footer className="bg-ink text-white/80">
@@ -46,9 +35,7 @@ export default function Footer() {
         {/* Brand + contact */}
         <div className="space-y-4">
           <Link href="/" className="flex items-center">
-            {/* TODO: confirm src path + adjust width/height to match your file.
-                A white/light logo variant may look better on this dark background —
-                swap to /logo-white.svg if you have one. */}
+          
             <Image src="/Icon/Header/Code_Generated_Image.png" alt="KenaKata" width={140} height={36} />
           </Link>
 

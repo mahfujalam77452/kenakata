@@ -7,9 +7,6 @@ const FEATURED_PRODUCTS_PLACEHOLDER: ProductCardData[] = await getProduct({limit
 
 console.log(FEATURED_PRODUCTS_PLACEHOLDER)
 
-/**
- 
- */
 export default function FeaturedProducts() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

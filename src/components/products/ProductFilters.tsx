@@ -149,7 +149,7 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
             const isActive = activeId === category.id;
             return (
               <li key={category.id}>
-                {/* TODO: real href/onClick for selecting this category */}
+                
                 <Link
                   href="#"
                   onClick={()=>{setActiveId(category.id); setPageNumber(1)}}

@@ -5,14 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { isLoggedIn, clearSession } from "@/lib/utils/session";
 
-/**
- * Shows "Login" (linking to /login) when logged out, or "Logout" (a button
- * that clears the session) when logged in.
- *
- * Client component because login state lives in localStorage (see
- * lib/auth/session.ts), which only exists in the browser — everything else
- * in Header stays a plain server component, only this piece needs JS.
- */
+
 export default function AuthAction() {
   const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);

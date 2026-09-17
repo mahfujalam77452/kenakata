@@ -6,10 +6,9 @@ interface StoredSession {
   savedAt: number; // epoch ms, used to expire the session client-side
 }
 
-// The API's refresh_token is only valid ~10 hours (per the docs) even
-// though access_token itself lasts 20 days — we treat the local session as
+
 // "logged out" after this window so the checkout redirect behaves sensibly.
-const SESSION_MAX_AGE_MS = 10 * 60 * 60 * 1000;
+const SESSION_MAX_AGE_MS = 15 * 60 * 1000;
 
 export function saveSession(tokens: { access_token: string; refresh_token: string }) {
   if (typeof window === "undefined") return;

@@ -36,8 +36,8 @@ function ProductsContent() {
   const [products,setProducts] = useState<ProductCardData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // --- demo search: debounced title filter over the currently loaded
-  // `products` (no API call — just filters what's already on screen) ---
+  // demo search: debounced title filter over the currently loaded
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -136,10 +136,7 @@ function ProductsContent() {
             </div>
           </div>
 
-          {/* Product grid — 2 cols mobile, 3 tablet, 4 desktop, same counts
-              as before, but the page container above is now wider
-              (max-w-screen-2xl instead of max-w-7xl), so every column gets
-              noticeably more room and cards render bigger. */}
+         
           {isLoading ? (
             <div className="flex min-h-[420px] flex-col items-center justify-center gap-3 rounded-lg border border-mist text-ink/60">
               <Loader2 className="h-6 w-6 animate-spin text-brand-teal" />

@@ -8,13 +8,7 @@ interface ProductGalleryProps {
   title: string;
 }
 
-/**
- * Product image gallery — a large main image with up to 4 small thumbnails
- * below/beside it; clicking a thumbnail swaps the main image.
- *
- * Client component because the click-to-swap needs local state — there's no
- * clean JS-free way to do this interaction.
- */
+
 export default function ProductGallery({ images, title }: ProductGalleryProps) {
   const gallery = images.slice(0, 4);
   const [activeIndex, setActiveIndex] = useState(0);

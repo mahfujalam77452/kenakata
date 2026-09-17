@@ -10,15 +10,7 @@ interface ProductDetailsPageProps {
   params: Promise<{ slug: string }>;
 }
 
-/**
- * /products/[slug] — fetches the real product from the API by slug (server
- * component), then renders:
- * - ProductGallery (client, handles the thumbnail click-to-swap)
- * - price/description + AddToCartButton (client, wired to CartContext —
- *   see the assumption noted in that file)
- * - a static ProductReviews section
- * - RelatedProducts, fetched from the API by this product's id
- */
+
 export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
   const { slug } = await params;
 
