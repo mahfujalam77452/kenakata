@@ -29,7 +29,7 @@ export default async function RelatedProducts({ productId }: { productId: number
   if (related.length === 0) return null;
 
   return (
-    <section className="group/related border-t border-mist pt-8">
+    <section className="group border-t border-mist pt-8">
       <h2 className="mb-5 font-heading text-xl font-bold text-ink">Related products</h2>
 
       {/* Drives the "See More" reveal — sr-only keeps it keyboard-focusable */}
