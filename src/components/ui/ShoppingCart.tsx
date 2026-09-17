@@ -5,8 +5,8 @@ import { ShoppingCart } from "lucide-react"
 import { useProduct } from "@/context/ProductContext"
 export default function ShoppingCarts() {
 
-    const {cardItems} = useProduct()
-    const total_items = cardItems.length
+    const {cartItems} = useProduct()
+    const total_items = cartItems.length
 
     return (
         <>

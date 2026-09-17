@@ -9,8 +9,14 @@ export interface Product{
     category:Category;
     images:string[];
     slug:string;
-    createAt:string;
-    updateAt:string;
+    createAt?:string;
+    updateAt?:string;
+}
+
+
+
+export interface CartItem extends Product {
+    product_count:number;
 }
 
 export interface Query{

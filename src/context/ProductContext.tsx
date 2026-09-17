@@ -3,13 +3,13 @@
 import { createContext, useContext, useState } from "react";
 import { useEffect } from "react";
 
-import { Product } from "@/lib/types/Product";
+import { CartItem } from "@/lib/types/Product";
 import { Category } from "@/lib/types/Category";
 import { getCategory } from "@/lib/api/category";
 type ProductContextType = {
   categories: Category[];
-  cardItems: Product[];
-  setCardItems: React.Dispatch<React.SetStateAction<Product[]>>;
+  cartItems: CartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
 };
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -24,7 +24,7 @@ export function ProductProvider({
  
 // For add/remove/purches cart data globally
   
-  const [cardItems, setCardItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 //For storing all categories early
   const [categories,setCategories] = useState<Category[]>([])
 
@@ -43,7 +43,7 @@ export function ProductProvider({
     )
 
   return (
-    <ProductContext.Provider value={{ cardItems, setCardItems,categories }}>
+    <ProductContext.Provider value={{ cartItems, setCartItems,categories }}>
       {children}
     </ProductContext.Provider>
   );

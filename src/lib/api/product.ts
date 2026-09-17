@@ -42,11 +42,62 @@ export async function getProduct(query:Query): Promise<Product[]> {
     }
 
 }
+ 
+
+
+export async function getRelatedProducts (id:number) : Promise<Product[]> {
+       
+
+    const url = `${base}/categories/${id}/products`
+
+    try{
+
+        const res = await fetch(url)
+
+        if(!res.ok) {
+
+                const errorData = await res.json();
+                 
+                 throw new Error(errorData.message || "Something went wrong !")
+        }
+
+
+        return await res.json();
+
+    }catch(error){
+        throw error;
+    }
+}
 
 export async function getProductByCategory(id:number) : Promise<Product[]> {
        
 
-    const url = `${base}/categories/{id}/products}`
+    const url = `${base}/products/${id}/related`
+
+    try{
+
+        const res = await fetch(url)
+
+        if(!res.ok) {
+
+                const errorData = await res.json();
+                 
+                 throw new Error(errorData.message || "Something went wrong !")
+        }
+
+
+        return await res.json();
+
+    }catch(error){
+        throw error;
+    }
+}
+
+
+export async function getProductBySlug(slug:string) : Promise<Product> {
+       
+
+    const url = `${base}/products/slug/${slug}`
 
     try{
 
