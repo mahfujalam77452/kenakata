@@ -8,11 +8,15 @@ export async function login(payload: LoginPayload): Promise<AuthTokens> {
 
   const res = await fetch(url, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
     const errorData = await res.json();
+
     throw new Error(errorData.message || "Something went wrong!");
   }
 
@@ -44,21 +48,24 @@ export async function register(
   payload: RegisterPayload
 ): Promise<AuthUser> {
   const url = `${base}/users/`;
+  console.log(payload);
 
   const res = await fetch(url, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       name: payload.name,
       email: payload.email,
       password: payload.password,
-      avatar:
-        payload.avatar ??
-        "https://placehold.co/200x200?text=User",
+      avatar: "https://placehold.co/200x200?text=User"
     }),
   });
-
+   console.log("I am response ",res)
   if (!res.ok) {
     const errorData = await res.json();
+    
     throw new Error(errorData.message || "Something went wrong!");
   }
 
