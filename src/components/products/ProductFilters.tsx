@@ -26,8 +26,9 @@ type ProductProps = {
   setPageNumber:React.Dispatch<React.SetStateAction<number>>
   products: ProductCardData[];
   setProducts: React.Dispatch<React.SetStateAction<ProductCardData[]>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export default function ProductFilters({pageNumber,searchcategory,setPageNumber,products,setProducts}:ProductProps) {
+export default function ProductFilters({pageNumber,searchcategory,setPageNumber,products,setProducts,setIsLoading}:ProductProps) {
     
     const [activeId,setActiveId] = useState<number>(searchcategory?searchcategory:0);
     const [minValue,setMinValue] = useState<number>(0);
@@ -59,6 +60,7 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
             
             async function getProducts() {
                 
+                setIsLoading(true);
                 const query:Query = {}
                 //Collecting the query
                 if(minValue > 0)query.price_min = minValue;
@@ -72,6 +74,7 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
                 const allProducts = await getProduct(query)
                 setDuplicateProducts(allProducts);
                 setProducts(allProducts)
+                setIsLoading(false);
                 console.log("duplicate Products ..",duplicateProducts)
             }
           //I applied here debouncing for minimum api call for max/min price
@@ -80,7 +83,46 @@ export default function ProductFilters({pageNumber,searchcategory,setPageNumber,
          
 
             
-        },[activeId,minValue,maxValue,pageNumber]
+        },[activeId,pageNumber]
+    )
+
+
+
+
+    useEffect(
+        () => {
+            
+            async function getProducts() {
+                
+                setIsLoading(true);
+                const query:Query = {}
+                //Collecting the query
+                if(minValue > 0)query.price_min = minValue;
+                //This api doesn't works only with Minimum price Thats why i do this
+                if(minValue>0)query.price_max= 100000
+                if(maxValue > 0)query.price_max = maxValue
+                
+                if(activeId > 0)query.categoryId =activeId;
+                query.offset = pageNumber-1;
+                query.limit = 12;
+                const allProducts = await getProduct(query)
+                setDuplicateProducts(allProducts);
+                setProducts(allProducts)
+                setIsLoading(false);
+                console.log("duplicate Products ..",duplicateProducts)
+            }
+          //I applied here debouncing for minimum api call for max/min price
+    
+            const timer = setTimeout(() => {
+    getProducts();
+  }, 500);
+
+  return () => {
+    clearTimeout(timer);
+  };
+
+            
+        },[minValue,maxValue]
     )
 
   return (

@@ -27,7 +27,7 @@ export default function RegisterPage() {
       const tokens = await login({ email, password });
 
       saveSession(tokens);
-      router.push("/");
+      router.back();
     } catch {
       setError("Could not create account. Try a different email.");
     } finally {

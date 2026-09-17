@@ -21,7 +21,7 @@ export default function LoginPage() {
     try {
       const tokens = await login({ email, password });
       saveSession(tokens);
-      router.push("/");
+      router.back();
     } catch {
       setError("Invalid email or password.");
     } finally {
